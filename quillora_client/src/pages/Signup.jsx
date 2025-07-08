@@ -1,4 +1,6 @@
 import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
+import axios from "axios";
 
 const HEADER = (
   <header className="main-header">
@@ -13,7 +15,7 @@ const HEADER = (
       <a href="/read.html">READ</a>
       <a href="/write.html">WRITE</a>
       <a href="/chatrooms.html">CHATROOMS</a>
-      <a href="#">JOIN/SIGN IN</a>
+      <a href="/signup">JOIN/SIGNUP</a>
       <a href="#" className="lang-link">MY PROFILE</a>
     </nav>
   </header>
@@ -43,6 +45,7 @@ export default function Signup() {
   const [showPassword, setShowPassword] = useState(false);
   const [error, setError] = useState("");
   const [suggestion, setSuggestion] = useState(getRandomUsername());
+  const navigate = useNavigate();
 
   const handleSuggestion = () => {
     let newSuggestion;
@@ -53,8 +56,12 @@ export default function Signup() {
     setUsername(newSuggestion);
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async(e) => {
     e.preventDefault();
+    axios.post('http://localhost:3000/users', { username: newSuggestion, email , password })
+    .then(result=> console.log("Username suggestion sent to server:", result))
+    navigate('/login') // Redirect to login page after suggestion
+    .catch(err => console.log(err));
     setError("");
     if (!username) {
       setError("Username is required.");
@@ -68,8 +75,22 @@ export default function Signup() {
       setError("Password must be at least 8 characters.");
       return;
     }
+    try {
+        const res = await axios.post("http://localhost:3000/users", {
+        username,
+        email,
+        password,
+        });
+        console.log("Account created:", res.data);
+        alert("Account created successfully!");
+        navigate("/login"); // Redirect to login page
+    } catch (err) {
+        const msg = err.response?.data?.message || "Signup failed.";
+        setError(msg);
+        console.error("Signup error:", err.response?.data || err.message);
+    }
     // Submit logic here (API call, etc.)
-    alert("Account created! (Demo only)");
+    alert("Account created!");
   };
 
   return (
@@ -137,7 +158,11 @@ export default function Signup() {
           <button className="signup-submit" type="submit">
             Create Account
           </button>
-          <button className="signin-submit" type="submit">
+          <button
+            className="signin-submit"
+            type="button"
+            onClick={() => navigate('/login')}
+          >
             Already in! Sign In
           </button>
         </form>
@@ -175,7 +200,7 @@ export default function Signup() {
             background-color: rgba(255, 255, 255, 0.9);
         }
         .logo {
-            font-size: 1.6rem;
+            font-size: 2.5rem;
             font-weight: 700;
             line-height: 1;
             color: #ffffff;
@@ -183,7 +208,7 @@ export default function Signup() {
         }
 
         .logo-subtext {
-            font-size: 0.6rem;
+            font-size: 0.8rem;
             font-weight: 400;
             letter-spacing: 0.1em;
             font-family: 'Montserrat', sans-serif;
@@ -193,7 +218,7 @@ export default function Signup() {
             color: #ffffff;
             text-decoration: none;
             margin-left: 2.5rem;
-            font-size: 0.8rem;
+            font-size: 1rem;
             font-weight: 500;
             letter-spacing: 0.1em;
             transition: color 0.5s ease;
@@ -311,7 +336,7 @@ export default function Signup() {
         }
         .signin-submit {
           margin-top: 0.5rem;
-          background: rgb(164, 161, 161);
+          background: rgb(140, 138, 138);
           color: #fff;
           border: none;
           border-radius: 0.7rem;
