@@ -1,0 +1,19 @@
+# Node dependencies
+node_modules/
+**/node_modules/
+
+# Logs
+*.log
+
+# Environment variables
+.env
+
+# macOS
+.DS_Store
+
+# Build folders
+dist/
+build/
+
+# VS Code
+.vscode/
