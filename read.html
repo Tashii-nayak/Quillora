@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>The Reading Room - Wishpr</title>
+  <link rel="stylesheet" href="style.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;700&family=Playfair+Display:ital,wght@0,400..900;1,400..900&display=swap" rel="stylesheet">
+</head>
+<body class="read-page">
+  <header class="main-header">
+    <div class="logo">
+      Wishpr
+      <span class="logo-subtext">Love Bibliophile</span>
+    </div>
+    <nav class="main-nav">
+      <a href="index.html">HOME</a>
+      <a href="about.html">ABOUT</a>
+      <a href="explore.html">EXPLORE</a>
+      <a href="read.html" class="active">READ</a>
+      <a href="write.html">WRITE</a>
+      <a href="chatrooms.html">CHATROOMS</a>
+      <a href="#">JOIN/SIGN IN</a>
+      <a href="#" class="lang-link">MY PROFILE</a>
+    </nav>
+  </header>
+
+  <section class="reading-room-hero-section">
+    <div class="reading-room-hero-content">
+      <h1>The Reading Room</h1>
+      <p>Step into a quiet world where stories breathe and emotions linger. This is more than just a place to read — it's a space to listen. To the unspoken thoughts of strangers, the whispered truths behind anonymous voices, and the raw, vulnerable expressions that rarely find a stage elsewhere. From poetic fragments and journal-like entries to soul-baring monologues and midnight musings — every piece here is real, untamed, and human. You're not just reading. You're witnessing. Feeling. Connecting.<br><strong>Let the silence between the lines speak to you.</strong></p>
+    </div>
+  </section>
+
+  <section class="editorsPickSection">
+    <div class="editorsPickHeader">
+      <h1>Pinned Reads / Editor's Pick</h1>
+      <p>Discover this week's standout pieces, handpicked by our editors for their honesty, beauty, and emotional resonance.</p>
+    </div>
+    <div class="editorsPickGrid">
+      <div class="editorsPickCard">
+        <h2>"The Quiet Between"</h2>
+        <p>
+          Sometimes, the loudest feelings are the ones we never say aloud. In the hush of midnight, I write what I cannot speak—hoping someone, somewhere, will understand the silence between my words.
+        </p>
+        <span class="editorsPickLabel">Editor's Pick</span>
+      </div>
+      <div class="editorsPickCard">
+        <h2>"Unsent Letters"</h2>
+        <p>
+          I write to you, though you'll never read these lines. Each word is a wish, a memory, a hope that maybe letting go is just another way of holding on.
+        </p>
+        <span class="editorsPickLabel">Pinned Read</span>
+      </div>
+      <div class="editorsPickCard">
+        <h2>"Fragments of Light"</h2>
+        <p>
+          Even on the darkest days, I find pieces of myself in the stories of strangers. We are all searching for a little light, and sometimes, we find it in each other's words.
+        </p>
+        <span class="editorsPickLabel">Editor's Pick</span>
+      </div>
+      <!-- Add more cards as needed -->
+    </div>
+  </section>
+
+  <div class="library-slider">
+    <button class="library-arrow left" aria-label="Previous Slide">&#8592;</button>
+    <section class="library-slide active" data-genre="main">
+      <h1 class="library-heading">Browse Your Library</h1>
+    </section>
+    <section class="library-slide" data-genre="fantasy" style="background-image:url('https://images.unsplash.com/photo-1464983953574-0892a716854b?q=80&w=1500&auto=format&fit=crop');">
+      <h1 class="library-heading genre-slide-heading">Fantasy</h1>
+    </section>
+    <section class="library-slide" data-genre="scifi" style="background-image:url('https://images.unsplash.com/photo-1462331940025-496dfbfc7564?q=80&w=1500&auto=format&fit=crop');">
+      <h1 class="library-heading genre-slide-heading">Science Fiction</h1>
+    </section>
+    <section class="library-slide" data-genre="dystopian" style="background-image:url('https://images.unsplash.com/photo-1604315841269-a1f298321670?w=1600&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8M3x8ZHlzdG9waWFufGVufDB8MHwwfHx8MA%3D%3D');">
+      <h1 class="library-heading genre-slide-heading">Dystopian</h1>
+    </section>
+    <section class="library-slide" data-genre="adventure" style="background-image:url('https://images.unsplash.com/photo-1582092605221-bf4ddf388587?w=1600&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTZ8fGFjdGlvbiUyMGFkdmVudHVyZXxlbnwwfDB8MHx8fDA%3D');">
+      <h1 class="library-heading genre-slide-heading">Action & Adventure</h1>
+    </section>
+    <section class="library-slide" data-genre="mystery" style="background-image:url('https://images.unsplash.com/photo-1560146560-1fce47962590?q=80&w=1470&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D');">
+      <h1 class="library-heading genre-slide-heading">Mystery</h1>
+    </section>
+    <section class="library-slide" data-genre="horror" style="background-image:url('https://images.unsplash.com/photo-1481018085669-2bc6e4f00eed?q=80&w=2940&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D');">
+      <h1 class="library-heading genre-slide-heading">Horror</h1>
+    </section>
+    <section class="library-slide" data-genre="thriller" style="background-image:url('https://images.unsplash.com/photo-1520683197291-667c5475ed63?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D');">
+      <h1 class="library-heading genre-slide-heading">Thriller & Suspense</h1>
+    </section>
+    <section class="library-slide" data-genre="historical" style="background-image:url('https://images.unsplash.com/photo-1505664194779-8beaceb93744?q=80&w=2940&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D');">
+      <h1 class="library-heading genre-slide-heading">Historical Fiction</h1>
+    </section>
+    <button class="library-arrow right" aria-label="Next Slide">&#8594;</button>
+  </div>
+  <section class="contact-section">
+    <div class="contact-left">
+      <h2>
+          <span class="contact-italic">Let's shape your<br>atmosphere</span> <span class="contact-bold">together</span>
+      </h2>
+     <hr class="contact-divider">
+        <div class="contact-info">
+          <p>contact@quillora.com</p>
+          <p>+91 12342 56565</p>
+        </div>
+    </div>
+    <div class="contact-crosshair">
+      <div class="crosshair-vertical"></div>
+      <div class="crosshair-horizontal"></div>
+    </div>
+    <div class="contact-right">
+      <span class="contact-title">Quillora<span class="logo-subtext"> Love Bibliophile</span></span>
+    </div>
+  </section>
+
+  <footer class="footer-main">
+    <div class="footer-main-content">
+      <div class="footer-logo">Quillora</div>
+      <div class="footer-links">
+        <a href="index.html">Home</a>
+        <a href="explore.html" >Explore</a>
+        <a href="about.html">About</a>
+        <a href="read.html" class="active">Read</a>
+        <a href="write.html">Write</a>
+        <a href="chatrooms.html">Chatrooms</a>
+        <a href="#">Contact</a>
+      </div>
+      <div class="footer-copy">
+        &copy; 2025 Quillora. All rights reserved.
+      </div>
+    </div>
+  </footer>
+
+  <div class="crosshair"></div>
+
+  <script src="script.js"></script>
+</body>
+</html> 

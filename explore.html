@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Explore - QUILLORA</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;700&family=Playfair+Display:ital,wght@0,400..900;1,400..900&family=Tangerine:wght@700&display=swap" rel="stylesheet">
+</head>
+<body class="explore-page">
+    <header class="main-header">
+        <div class="logo">
+            Quillora
+            <span class="logo-subtext">Love bibliophile</span>
+        </div>
+        <nav class="main-nav">
+            <a href="index.html">HOME</a>
+            <a href="about.html">ABOUT</a>
+            <a href="explore.html" class="active">EXPLORE</a>
+            <a href="read.html">READ</a>
+            <a href="write.html">WRITE</a>
+            <a href="chatrooms.html">CHATROOMS</a>
+            <a href="#">JOIN/SIGN IN</a>
+            <a href="#" class="lang-link">MY PROFILE</a>
+        </nav>
+    </header>
+
+    <main class="hero-section">
+        <div class="hero-content">
+            <h1>Discover:<br>Where Stories Come Alive</h1>
+            <p>Embark on a journey through the vast landscape of human expression. Every story is a window into another soul, every word a bridge between hearts. Here, you'll find tales that resonate, thoughts that inspire, and voices that echo your own deepest feelings. Let curiosity be your guide as you navigate through the rich tapestry of shared experiences.</p>
+        </div>
+    </main>
+
+    <section class="curated-collections-section">
+      <!-- Thematic Banners -->
+      <div class="thematic-banners">
+        <div class="banner">Inspiration</div>
+        <div class="banner">Healing</div>
+        <div class="banner">Adventure</div>
+        <div class="banner">Reflection</div>
+        <div class="banner">Growth</div>
+      </div>
+
+      <!-- Featured Collections -->
+      <div class="collections-header">
+        <h2 style="color: black;">Curated Collections</h2>
+        <p>Discover select writings and readings gathered under powerful themes. Click a collection to explore content that resonates with your mood or interest.</p>
+      </div>
+      <div class="collections-grid">
+        <a href="#" class="collection-card">
+          <div class="collection-image" style="background-image: url('https://images.unsplash.com/photo-1455058683937-c45857082982?q=80&w=2206&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D');"></div>
+          <div class="collection-title">Finding Light</div>
+          <div class="collection-desc">Stories of hope and inspiration</div>
+        </a>
+        <a href="#" class="collection-card">
+          <div class="collection-image" style="background-image: url('https://plus.unsplash.com/premium_photo-1677396921317-5398bbe55a68?q=80&w=2101&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D');"></div>
+          <div class="collection-title">Journeys Within</div>
+          <div class="collection-desc">Reflections and self-discovery</div>
+        </a>
+        <a href="#" class="collection-card">
+          <div class="collection-image" style="background-image: url('https://images.unsplash.com/photo-1483691278019-cb7253bee49f?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D');"></div>
+          <div class="collection-title">Healing Words</div>
+          <div class="collection-desc">Comfort for the soul</div>
+        </a>
+        <a href="#" class="collection-card">
+          <div class="collection-image" style="background-image: url('https://images.unsplash.com/photo-1492879291357-620e858bd26a?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D');"></div>
+          <div class="collection-title">Bold Voices</div>
+          <div class="collection-desc">Empowering perspectives</div>
+        </a>
+        <!-- Add more collection cards as needed -->
+      </div>
+    </section>
+
+    <section class="explore-mood-selector">
+      <h2>Select Your Mood</h2>
+      <div class="mood-buttons">
+        <button class="mood-btn" data-mood="sad">😢 Sad</button>
+        <button class="mood-btn" data-mood="nostalgic">🌙 Nostalgic</button>
+        <button class="mood-btn" data-mood="happy">😊 Happy</button>
+        <button class="mood-btn" data-mood="hopeful">🌱 Hopeful</button>
+        <button class="mood-btn" data-mood="raw">🔥 Raw</button>
+      </div>
+      <div class="mood-content" id="moodContent" style="display:none;">
+        <div class="notepad-block">
+          <h3>Write your thoughts</h3>
+          <textarea id="notepad" placeholder="Start writing..."></textarea>
+        </div>
+        <div class="reading-list-block">
+          <h3>Readings for <span id="moodLabel"></span></h3>
+          <ul id="readingList"></ul>
+        </div>
+        <button class="close-mood-content" id="closeMoodContent">Close</button>
+      </div>
+    </section>
+
+    <section class="explore-features-showcase">
+      <div class="features-header">
+        <h2>Discover What Quillora Offers</h2>
+        <p>Explore the platform's core features — all in one place, no navigation needed.</p>
+      </div>
+      <div class="features-list">
+        <div class="feature-card">
+          <h3>Write Without Judgment</h3>
+          <p>A safe, anonymous space to pour your heart out. No names, no filters — just your truth.</p>
+        </div>
+        <div class="feature-card">
+          <h3>Read to Feel Understood</h3>
+          <p>Discover raw, real voices from others like you. Find comfort in shared silence and spoken scars.</p>
+        </div>
+        <div class="feature-card">
+          <h3>Chat Anonymously</h3>
+          <p>Dive into quiet conversations. Listen. Whisper. Connect.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="reading-writing-journeys">
+      <div class="journeys-header">
+        <h2>Reading & Writing Journeys</h2>
+        <p>Visual story paths to guide your creative and reading adventures</p>
+      </div>
+      
+      <div class="journeys-container">
+        <div class="journey-card writing-journey">
+          <h3>Writing Journey</h3>
+          <div class="journey-path">
+            <div class="journey-step">
+              <div class="step-icon">✍️</div>
+              <div class="step-content">
+                <h4>Start Writing</h4>
+                <p>Begin your story with a blank canvas</p>
+              </div>
+            </div>
+            <div class="journey-arrow">→</div>
+            <div class="journey-step">
+              <div class="step-icon">💾</div>
+              <div class="step-content">
+                <h4>Save</h4>
+                <p>Keep your thoughts safe and private</p>
+              </div>
+            </div>
+            <div class="journey-arrow">→</div>
+            <div class="journey-step">
+              <div class="step-icon">🔄</div>
+              <div class="step-content">
+                <h4>Revisit</h4>
+                <p>Return to refine and evolve</p>
+              </div>
+            </div>
+            <div class="journey-arrow">→</div>
+            <div class="journey-step">
+              <div class="step-icon">📤</div>
+              <div class="step-content">
+                <h4>Optionally Share</h4>
+                <p>Connect with others when ready</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Reading Journey -->
+        <div class="journey-card reading-journey">
+          <h3>Reading Journey</h3>
+          <div class="journey-path">
+            <div class="journey-step">
+              <div class="step-icon">📚</div>
+              <div class="step-content">
+                <h4>Browse Reads</h4>
+                <p>Explore diverse voices and stories</p>
+              </div>
+            </div>
+            <div class="journey-arrow">→</div>
+            <div class="journey-step">
+              <div class="step-icon">🎭</div>
+              <div class="step-content">
+                <h4>Choose Mood</h4>
+                <p>Find content that matches your feeling</p>
+              </div>
+            </div>
+            <div class="journey-arrow">→</div>
+            <div class="journey-step">
+              <div class="step-icon">📖</div>
+              <div class="step-content">
+                <h4>Read</h4>
+                <p>Immerse yourself in the story</p>
+              </div>
+            </div>
+            <div class="journey-arrow">→</div>
+            <div class="journey-step">
+              <div class="step-icon">🔖</div>
+              <div class="step-content">
+                <h4>Bookmark/Respond</h4>
+                <p>Save favorites or share your thoughts</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="contact-section">
+      <div class="contact-left">
+        <h2>
+            <span class="contact-italic">Let's shape your<br>atmosphere</span> <span class="contact-bold">together</span>
+        </h2>
+       <hr class="contact-divider">
+          <div class="contact-info">
+            <p>contact@quillora.com</p>
+            <p>+91 12342 56565</p>
+          </div>
+      </div>
+      <div class="contact-crosshair">
+        <div class="crosshair-vertical"></div>
+        <div class="crosshair-horizontal"></div>
+      </div>
+      <div class="contact-right">
+        <span class="contact-title">Quillora<span class="logo-subtext"> Love Bibliophile</span></span>
+      </div>
+    </section>
+
+    <footer class="footer-main">
+      <div class="footer-main-content">
+        <div class="footer-logo">Quillora</div>
+        <div class="footer-links">
+          <a href="index.html">Home</a>
+          <a href="explore.html" class="active">Explore</a>
+          <a href="about.html">About</a>
+          <a href="read.html">Read</a>
+          <a href="write.html">Write</a>
+          <a href="chatrooms.html">Chatrooms</a>
+          <a href="#">Contact</a>
+        </div>
+        <div class="footer-copy">
+          &copy; 2025 Quillora. All rights reserved.
+        </div>
+      </div>
+    </footer>
+
+    <div class="crosshair"></div>
+
+    <script src="script.js"></script>
+</body>
+</html> 

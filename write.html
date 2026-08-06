@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>The Writing Room - Quillora</title>
+  <link rel="stylesheet" href="style.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;700&family=Playfair+Display:ital,wght@0,400..900;1,400..900&display=swap" rel="stylesheet">
+</head>
+<body class="write-page">
+  <header class="main-header">
+    <div class="logo">
+      Quillora
+      <span class="logo-subtext">Love Bibliophile</span>
+    </div>
+    <nav class="main-nav">
+      <a href="index.html">HOME</a>
+      <a href="about.html">ABOUT</a>
+      <a href="explore.html">EXPLORE</a>
+      <a href="read.html">READ</a>
+      <a href="write.html" class="active">WRITE</a>
+      <a href="chatrooms.html">CHATROOMS</a>
+      <a href="#">JOIN/SIGN IN</a>
+      <a href="#" class="lang-link">MY PROFILE</a>
+    </nav>
+  </header>
+
+  <section class="reading-room-hero-section writing-room-hero-section">
+    <div class="reading-room-hero-content">
+      <h1>The Writing Corner</h1>
+      <p>This is your blank page — no expectations, no filters, no noise. Whether it's a fleeting thought, a buried memory, or a feeling too complex to name, here you can write it out. Anonymously, safely, honestly. You don't need to be a writer. You just need to feel. Because here, every word matters — not for how it sounds, but for how true it is. Write to release. Write to understand. Write to be heard.</p>
+      <p><strong>This is your space to let it out.</strong></p>
+    </div>
+  </section>
+
+  <section class="write-moodboard">
+    <div class="moodboard-header">
+      <h1>What's Your Mood?</h1>
+      <p>Select a mood and let your thoughts flow. Your words, your feelings, your space.</p>
+    </div>
+    <div class="moodboard-moods">
+      <button class="mood-btn" data-mood="sad">😢 Sad</button>
+      <button class="mood-btn" data-mood="nostalgic">🌙 Nostalgic</button>
+      <button class="mood-btn" data-mood="happy">😊 Happy</button>
+      <button class="mood-btn" data-mood="hopeful">🌱 Hopeful</button>
+      <button class="mood-btn" data-mood="raw">🔥 Raw</button>
+    </div>
+    <div class="moodboard-notepad-container">
+      <div class="moodboard-notepad" id="moodNotepad" style="display:none;">
+        <h2 id="moodTitle"></h2>
+        <textarea id="moodTextarea" placeholder="Write your thoughts here..."></textarea>
+      </div>
+    </div>
+  </section>
+
+  <section class="write-notepad-page">
+    <div class="notepad-header">
+      <h1>Write Freely</h1>
+      <div class="notepad-actions">
+        <button id="saveBtn" title="Save" aria-label="Save">&#128190; Save public</button>
+        <button id="saveBtn" title="Save" aria-label="Save">&#128190; Save private </button>
+      </div>
+    </div>
+    <div class="notepad-container">
+      <textarea id="mainNotepad" placeholder="Start writing here..."></textarea>
+    </div>
+    <div class="notepad-status" id="notepadStatus"></div>
+  </section>
+
+  <section class="contact-section">
+    <div class="contact-left">
+      <h2>
+        <span class="contact-italic">Let's shape your<br>atmosphere</span> <span class="contact-bold">together</span>
+      </h2>
+      <hr class="contact-divider">
+        <div class="contact-info">
+          <p>contact@quillora.com</p>
+          <p>+91 12342 56565</p>
+        </div>
+    </div>
+    <div class="contact-crosshair">
+      <div class="crosshair-vertical"></div>
+      <div class="crosshair-horizontal"></div>
+    </div>
+    <div class="contact-right">
+      <span class="contact-title">Quillora<span class="logo-subtext"> Love Bibliophile</span></span>
+    </div>
+  </section>
+
+  <footer class="footer-main">
+    <div class="footer-main-content">
+      <div class="footer-logo">Quillora</div>
+      <div class="footer-links">
+        <a href="index.html">Home</a>
+        <a href="explore.html">Explore</a>
+        <a href="about.html">About</a>
+        <a href="read.html">Read</a>
+        <a href="write.html" class="active">Write</a>
+        <a href="chatrooms.html">Chatrooms</a>
+        <a href="#">Contact</a>
+      </div>
+      <div class="footer-copy">
+        &copy; 2025 Quillora. All rights reserved.
+      </div>
+    </div>
+  </footer>
+  
+  <script src="script.js"></script>
+</body>
+</html> 
