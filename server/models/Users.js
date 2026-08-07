@@ -1,4 +1,5 @@
 const mongoose = require('mongoose');
+
 const UsersSchema = new mongoose.Schema({
     username: {
         type: String,
@@ -8,6 +9,7 @@ const UsersSchema = new mongoose.Schema({
         minlength: 3,
         maxlength: 30
     },
+
     email: {
         type: String,
         required: true,
@@ -20,18 +22,43 @@ const UsersSchema = new mongoose.Schema({
             }
         }
     },
+
     password: {
         type: String,
         required: true,
         minlength: 8,
-        select: false // Exclude password from queries by default
+        select: false
     },
-    notes: {
-        type: [String],
-        default: []
-    }
+
+    bio: {
+        type: String,
+        default: ""
+    },
+
+    profilePicture: {
+        type: String,
+        default: ""
+    },
+
+    followers: [{
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "user"
+    }],
+
+    following: [{
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "user"
+    }],
+
+    bookmarks: [{
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "post"
+    }]
+
 }, {
-    timestamps: true // Automatically manage createdAt and updatedAt fields
+    timestamps: true
 });
-const UserModel = mongoose.model("user", UsersSchema);
+
+const UserModel = mongoose.model('user', UsersSchema);
+
 module.exports = UserModel;

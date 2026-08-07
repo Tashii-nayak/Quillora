@@ -2,6 +2,8 @@ import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 
+import { NavLink } from 'react-router-dom';
+
 const HEADER = (
   <header className="main-header">
     <div className="logo">
@@ -9,14 +11,14 @@ const HEADER = (
       <span className="logo-subtext">Love Bibliophile</span>
     </div>
     <nav className="main-nav">
-      <a href="/index.html">HOME</a>
-      <a href="/about.html">ABOUT</a>
-      <a href="/explore.html">EXPLORE</a>
-      <a href="/read.html">READ</a>
-      <a href="/write.html">WRITE</a>
-      <a href="/chatrooms.html">CHATROOMS</a>
-      <a href="/signup" className="join-link">JOIN/SIGN IN</a>
-      <a href="/profile" class="lang-link">MY PROFILE</a>
+      <NavLink to="/">HOME</NavLink>
+      <NavLink to="/about">ABOUT</NavLink>
+      <NavLink to="/explore">EXPLORE</NavLink>
+      <NavLink to="/read">READ</NavLink>
+      <NavLink to="/write">WRITE</NavLink>
+      <NavLink to="/chatrooms">CHATROOMS</NavLink>
+      <NavLink to="/signup" className="join-link">JOIN/SIGN IN</NavLink>
+      <NavLink to="/profile" className="lang-link">MY PROFILE</NavLink>
     </nav>
   </header>
 );
@@ -42,17 +44,22 @@ export default function Login() {
     try {
       const result = await axios.post('http://localhost:3000/login', { username, password });
       if (result.data.message === "Login successful") {
-        localStorage.setItem("user", JSON.stringify({
-          username,
-          email: result.data.user.email // if available
-        }));
-        window.location.href = 'http://localhost:5173/index.html';
+        localStorage.setItem(
+          "user",
+          JSON.stringify({
+            _id: result.data.user._id,
+            username: result.data.user.username,
+            email: result.data.user.email,
+          })
+        );
+        navigate('/');
       } else {
         setError(result.data.message || "Login failed. Please try again.");
       }
     } catch (err) {
-      setError("Login failed. Please check your credentials and try again.");
-      console.log(err);
+      const msg = err.response?.data?.message || "Login failed. Please check your credentials and try again.";
+      setError(msg);
+      console.error("Login error:", err.response?.data || err.message);
     }
   };
 

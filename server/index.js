@@ -1,60 +1,92 @@
 const express = require('express');
-const mongoose = require('mongoose');
 const cors = require('cors');
-const UserModel = require('./models/Users'); 
+const dotenv = require('dotenv');
+const bcrypt = require('bcrypt');
+const connectDB = require('./config/db');
+const User = require('./models/Users');
+const postRoutes = require('./routes/postRoutes');
+
+dotenv.config();
+connectDB();
 
 const app = express();
+
 app.use(express.json());
 app.use(cors());
+app.use('/api/posts', postRoutes);
 
-mongoose.connect("mongodb://localhost:27017/quillora");
+app.post('/users', async (req, res) => {
+    try {
+        console.log("========== SIGNUP REQUEST ==========");
+        console.log(req.body);
+        const { username, email, password } = req.body;
 
-app.post('/users', (req, res) => {
-    UserModel.create(req.body)
-    .then(user => res.json(user))
-    .catch(err => res.json(err))
-});
-app.post('/login', (req, res) => {
-    const { username, password } = req.body;
-    UserModel.findOne({ username, password })
-    .then(user => {
-        if (user) {
-            res.json({ message: "Login successful", user });
-        } else {
-            res.status(401).json({ message: "Invalid username or password" });
+        if (!username || !email || !password) {
+            return res.status(400).json({ message: 'All fields are required.' });
         }
-    })
-    .catch(err => res.status(500).json({ message: "No record exists", error: err }));
-});
 
-app.post('/users/:username/notes', async (req, res) => {
-    const { username } = req.params;
-    const { note } = req.body;
-    if (!note) return res.status(400).json({ message: 'Note is required' });
-    try {
-        const user = await UserModel.findOneAndUpdate(
-            { username },
-            { $push: { notes: note } },
-            { new: true }
-        );
-        if (!user) return res.status(404).json({ message: 'User not found' });
-        res.json({ message: 'Note saved', notes: user.notes });
+        const existingUser = await User.findOne({
+            $or: [{ username }, { email: email.toLowerCase() }]
+        });
+
+        if (existingUser) {
+            return res.status(400).json({ message: 'Username or email already exists.' });
+        }
+
+        const hashedPassword = await bcrypt.hash(password, 10);
+        const user = new User({
+            username,
+            email: email.toLowerCase(),
+            password: hashedPassword
+        });
+
+        await user.save();
+        console.log("========== USER SAVED ==========");
+        console.log(user);
+        res.status(201).json({
+            message: 'User created successfully',
+            user: { _id: user._id, username: user.username, email: user.email }
+        });
     } catch (err) {
-        res.status(500).json({ message: 'Error saving note', error: err });
+        console.error('Signup error:', err);
+        res.status(500).json({ message: 'Server error during signup.' });
     }
 });
 
-app.get('/users/:username/notes', async (req, res) => {
-    const { username } = req.params;
+app.post('/login', async (req, res) => {
     try {
-        const user = await UserModel.findOne({ username });
-        if (!user) return res.status(404).json({ message: 'User not found' });
-        res.json({ notes: user.notes });
+        console.log("========== LOGIN REQUEST ==========");
+        console.log(req.body);
+        const { username, password } = req.body;
+
+        if (!username || !password) {
+            return res.status(400).json({ message: 'Username and password are required.' });
+        }
+
+        const user = await User.findOne({ username }).select('+password');
+
+        if (!user) {
+            return res.status(401).json({ message: 'Invalid username or password.' });
+        }
+
+        const isMatch = await bcrypt.compare(password, user.password);
+
+        if (!isMatch) {
+            return res.status(401).json({ message: 'Invalid username or password.' });
+        }
+
+        res.json({
+            message: 'Login successful',
+            user: { _id: user._id, username: user.username, email: user.email }
+        });
     } catch (err) {
-        res.status(500).json({ message: 'Error fetching notes', error: err });
+        console.error('Login error:', err);
+        res.status(500).json({ message: 'Server error during login.' });
     }
 });
 
-app.listen(3000, () => {
-    console.log("Server is running on port 3000");
+const PORT = process.env.PORT || 3000;
+
+app.listen(PORT, () => {
+    console.log(`Server is running on port ${PORT}`);
 });

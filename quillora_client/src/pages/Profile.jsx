@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 
 const HEADER = (
   <header className="main-header">
@@ -8,20 +8,20 @@ const HEADER = (
       <span className="logo-subtext">Love Bibliophile</span>
     </div>
     <nav className="main-nav">
-      <a href="/index.html">HOME</a>
-      <a href="/about.html">ABOUT</a>
-      <a href="/explore.html">EXPLORE</a>
-      <a href="/read.html">READ</a>
-      <a href="/write.html">WRITE</a>
-      <a href="/chatrooms.html">CHATROOMS</a>
-      <a href="/signup" className="join-link">JOIN/SIGN IN</a>
-      <a href="/profile" className="lang-link">MY PROFILE</a>
+      <NavLink to="/">HOME</NavLink>
+      <NavLink to="/about">ABOUT</NavLink>
+      <NavLink to="/explore">EXPLORE</NavLink>
+      <NavLink to="/read">READ</NavLink>
+      <NavLink to="/write">WRITE</NavLink>
+      <NavLink to="/chatrooms">CHATROOMS</NavLink>
+      <NavLink to="/signup" className="join-link">JOIN/SIGN IN</NavLink>
+      <NavLink to="/profile" className="lang-link">MY PROFILE</NavLink>
     </nav>
   </header>
 );
 
 export default function Profile() {
-  // Simulate fetching user info from localStorage or context
+  const navigate = useNavigate();
   const [user, setUser] = useState({ username: "booklover42", email: "booklover@example.com" });
   const [myWorks, setMyWorks] = useState([
     { title: "The Midnight Library", type: "Story", date: "2024-05-01" },
@@ -54,10 +54,13 @@ export default function Profile() {
             <h2>{user.username}</h2>
             <p className="profile-email">{user.email}</p>
           </div>
-          <button className="logout-btn" onClick={() => {
-            localStorage.removeItem('user');
-            window.location.href = '/login'; // or your login route
-          }}>
+          <button
+            className="logout-btn"
+            onClick={() => {
+              localStorage.removeItem('user');
+              navigate('/login');
+            }}
+          >
             Logout
           </button>
         </section>

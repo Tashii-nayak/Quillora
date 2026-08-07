@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 import axios from "axios";
 
 const HEADER = (
@@ -9,14 +9,14 @@ const HEADER = (
       <span className="logo-subtext">Love Bibliophile</span>
     </div>
     <nav className="main-nav">
-      <a href="/index.html">HOME</a>
-      <a href="/about.html">ABOUT</a>
-      <a href="/explore.html">EXPLORE</a>
-      <a href="/read.html">READ</a>
-      <a href="/write.html">WRITE</a>
-      <a href="/chatrooms.html">CHATROOMS</a>
-      <a href="/signup">JOIN/SIGNUP</a>
-      <a href="/profile" class="lang-link">MY PROFILE</a>
+      <NavLink to="/">HOME</NavLink>
+      <NavLink to="/about">ABOUT</NavLink>
+      <NavLink to="/explore">EXPLORE</NavLink>
+      <NavLink to="/read">READ</NavLink>
+      <NavLink to="/write">WRITE</NavLink>
+      <NavLink to="/chatrooms">CHATROOMS</NavLink>
+      <NavLink to="/signup">JOIN/SIGNUP</NavLink>
+      <NavLink to="/profile" className="lang-link">MY PROFILE</NavLink>
     </nav>
   </header>
 );
@@ -56,12 +56,8 @@ export default function Signup() {
     setUsername(newSuggestion);
   };
 
-  const handleSubmit = async(e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    axios.post('http://localhost:3000/users', { username: newSuggestion, email , password })
-    .then(result=> console.log("Username suggestion sent to server:", result))
-    navigate('/login') // Redirect to login page after suggestion
-    .catch(err => console.log(err));
     setError("");
     if (!username) {
       setError("Username is required.");
@@ -75,22 +71,22 @@ export default function Signup() {
       setError("Password must be at least 8 characters.");
       return;
     }
+
     try {
-        const res = await axios.post("http://localhost:3000/users", {
+      const res = await axios.post("http://localhost:3000/users", {
         username,
         email,
         password,
-        });
-        console.log("Account created:", res.data);
-        alert("Account created successfully!");
-        navigate("/login"); // Redirect to login page
+      });
+      console.log("Account created:", res.data);
+      alert("Account created successfully!");
+      navigate("/login");
     } catch (err) {
-        const msg = err.response?.data?.message || "Signup failed.";
-        setError(msg);
-        console.error("Signup error:", err.response?.data || err.message);
+      const msg = err.response?.data?.message
+        || (err.request ? "Cannot reach server. Make sure the backend is running on port 3000." : "Signup failed.");
+      setError(msg);
+      console.error("Signup error:", err.response?.data || err.message);
     }
-    // Submit logic here (API call, etc.)
-    alert("Account created!");
   };
 
   return (

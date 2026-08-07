@@ -1619,6 +1619,347 @@ body {
       padding: 1.5rem 1rem 1rem 1rem;
     }
   }
+
+.latestStories-section {
+  width: 100%;
+  min-height: 100vh;
+  background: #f8f7f4;
+  padding: 100px 60px;
+}
+
+.latestStories-container {
+  max-width: 1400px;
+  margin: 0 auto;
+  width: 100%;
+}
+
+.latestStories-header {
+  text-align: center;
+  margin-bottom: 60px;
+}
+
+.latestStories-header h1 {
+  font-family: 'Playfair Display', serif;
+  font-size: 3rem;
+  font-weight: 700;
+  margin-bottom: 1rem;
+  color: #1a1a1a;
+}
+
+.latestStories-header p {
+  color: #666;
+  font-size: 1.1rem;
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+.latestStories-grid{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(360px,1fr));
+    gap:35px;
+    align-items:stretch;
+}
+
+.latestStories-card{
+    background:white;
+    border-radius:18px;
+    overflow:hidden;
+    cursor:pointer;
+
+    display:flex;
+    flex-direction:column;
+
+    transition:.35s;
+
+    box-shadow:0 8px 25px rgba(0,0,0,.08);
+
+    min-height:620px;
+}
+
+.latestStories-card:hover{
+    transform:translateY(-10px);
+
+    box-shadow:0 18px 45px rgba(0,0,0,.18);
+}
+
+.latestStories-image{
+    width:100%;
+    height:260px;
+    object-fit:cover;
+    transition:.5s;
+}
+
+.latestStories-card:hover .latestStories-image{
+    transform:scale(1.08);
+}
+
+.latestStories-imagePlaceholder{
+    height:260px;
+
+    background:
+    linear-gradient(135deg,#ddd,#f8f8f8);
+
+    display:flex;
+    justify-content:center;
+    align-items:center;
+
+    font-size:60px;
+}
+
+.latestStories-imagePlaceholder::before{
+    content:"📖";
+}
+
+.latestStories-content{
+    padding:28px;
+
+    display:flex;
+    flex-direction:column;
+
+    flex:1;
+}
+
+.latestStories-title{
+    font-family:'Playfair Display',serif;
+    font-size:1.55rem;
+    line-height:1.4;
+    margin-bottom:15px;
+    color: #111;
+}
+
+.latestStories-excerpt{
+
+    color: #555;
+    line-height:1.8;
+    font-size:.98rem;
+    margin-bottom:22px;
+    flex-grow:1;
+}
+
+.latestStories-meta {
+  display: flex;
+  gap: 12px;
+  margin-bottom: 8px;
+}
+
+.latestStories-author {
+  font-size: 0.85rem;
+  color: #888;
+  font-weight: 500;
+}
+
+.latestStories-genre{
+    background: #111;
+    color:white;
+    padding:5px 14px;
+    border-radius:30px;
+    font-size:.75rem;
+    text-transform:uppercase;
+    letter-spacing:1px;
+}
+
+.latestStories-footer{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    margin-top:20px;
+    padding-top:18px;
+    border-top:1px solid #eee;
+    font-size:.82rem;
+    color: #888;
+}
+
+.latestStories-readTime,
+.latestStories-date {
+  font-size: 0.8rem;
+  color: #999;
+}
+
+.latestStories-readMore{
+    margin-top:20px;
+    background: #111;
+    color:white;
+    border:none;
+    padding:14px;
+    border-radius:8px;
+    cursor:pointer;
+    transition:.3s;
+    width:100%;
+}
+
+.latestStories-readMore:hover{
+    background: #4f46e5;
+}
+
+.latestStories-noStories {
+  grid-column: 1 / -1;
+  text-align: center;
+  color: #999;
+  padding: 40px;
+  font-size: 1.1rem;
+}
+
+.latestStories-loading {
+  grid-column: 1 / -1;
+  text-align: center;
+  color: #666;
+  padding: 20px;
+}
+
+.latestStories-loadMore {
+  display: flex;
+  justify-content: center;
+  padding-top: 20px;
+}
+
+.latestStories-button {
+  background: #1a1a1a;
+  color: #fff;
+  border: none;
+  border-radius: 6px;
+  padding: 12px 32px;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.3s ease;
+}
+
+.latestStories-button:hover {
+  background: #333;
+}
+
+@media (max-width: 1200px) {
+  .latestStories-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 768px) {
+  .latestStories-section {
+    padding: 60px 24px;
+  }
+
+  .latestStories-header h1 {
+    font-size: 2rem;
+  }
+
+  .latestStories-header p {
+    font-size: 1rem;
+  }
+
+  .latestStories-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 24px;
+  }
+}
+
+@media (max-width: 480px) {
+
+  .latestStories-section{
+    padding:50px 18px;
+  }
+
+  .latestStories-container{
+    width:100%;
+    max-width:100%;
+  }
+
+  .latestStories-header{
+    margin-bottom:35px;
+  }
+
+  .latestStories-header h1{
+    font-size:2rem;
+    line-height:1.2;
+    margin-bottom:12px;
+  }
+
+  .latestStories-header p{
+    font-size:.95rem;
+    line-height:1.6;
+    padding:0 5px;
+  }
+
+  .latestStories-grid{
+    grid-template-columns:1fr;
+    gap:24px;
+  }
+
+  .latestStories-card{
+    background:#fff;
+    border-radius:18px;
+    overflow:hidden;
+    display:flex;
+    flex-direction:column;
+    height:100%;
+    box-shadow:0 8px 25px rgba(0,0,0,.08);
+    transition:all .3s ease;
+    cursor:pointer;
+    }
+
+    .latestStories-card:hover{
+        transform:translateY(-8px);
+        box-shadow:0 18px 40px rgba(0,0,0,.15);
+    }
+
+  .latestStories-image,
+  .latestStories-imagePlaceholder{
+    height:200px;
+  }
+
+  .latestStories-content{
+    padding:18px;
+  }
+
+  .latestStories-title{
+    font-size:1.25rem;
+    line-height:1.4;
+    margin-bottom:10px;
+  }
+
+  .latestStories-excerpt{
+    font-size:.92rem;
+    line-height:1.7;
+    margin-bottom:18px;
+  }
+
+  .latestStories-meta{
+    flex-wrap:wrap;
+    gap:8px;
+    margin-bottom:14px;
+  }
+
+  .latestStories-author,
+  .latestStories-genre{
+    font-size:.8rem;
+  }
+
+  .latestStories-footer{
+    flex-direction:column;
+    align-items:flex-start;
+    gap:8px;
+    margin-top:18px;
+  }
+
+  .latestStories-readMore{
+    width:100%;
+    margin-top:18px;
+    text-align:center;
+    padding:12px;
+    font-size:.95rem;
+  }
+
+  .latestStories-loadMore{
+    padding-top:10px;
+  }
+
+  .latestStories-button{
+    width:100%;
+    max-width:260px;
+    padding:14px;
+    font-size:1rem;
+  }
+}
     
 .library-arrow {
   position: absolute;
@@ -1818,6 +2159,32 @@ body {
   background: #bee5ea;
   color: #fff;
   transform: translateY(-2px) scale(1.05);
+}
+
+.story-details{
+    width: 90%;
+    max-width: 900px;
+    margin: 20px auto;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.story-input,
+.story-select{
+    width: 100%;
+    padding: 14px 18px;
+    font-size: 16px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    outline: none;
+    font-family: inherit;
+    background: white;
+}
+
+.story-input:focus,
+.story-select:focus{
+    border-color: #7d5fff;
 }
 
 .notepad-container {
