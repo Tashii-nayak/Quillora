@@ -142,17 +142,27 @@ document.addEventListener('DOMContentLoaded', function() {
             current = idx;
         }
         if (leftArrow) {
-          leftArrow.addEventListener('click', () => {
+          leftArrow.addEventListener('click', (e) => {
+              e.stopPropagation();
               let prev = (current - 1 + slides.length) % slides.length;
               showSlide(prev);
           });
         }
         if (rightArrow) {
-          rightArrow.addEventListener('click', () => {
+          rightArrow.addEventListener('click', (e) => {
+              e.stopPropagation();
               let next = (current + 1) % slides.length;
               showSlide(next);
           });
         }
+        slides.forEach((slide) => {
+            slide.addEventListener('click', () => {
+                const genre = slide.getAttribute('data-genre');
+                if (genre && genre !== 'main') {
+                    window.location.href = `/read/${encodeURIComponent(genre)}`;
+                }
+            });
+        });
         showSlide(0);
     })();
 

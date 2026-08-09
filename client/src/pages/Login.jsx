@@ -42,8 +42,16 @@ export default function Login() {
       return;
     }
     try {
-      const result = await axios.post('http://localhost:3000/login', { username, password });
+      const result = await axios.post("http://localhost:3000/login", {
+        username,
+        password,
+      });
+
       if (result.data.message === "Login successful") {
+        if (result.data.token) {
+          localStorage.setItem("token", result.data.token);
+        }
+
         localStorage.setItem(
           "user",
           JSON.stringify({
@@ -52,9 +60,8 @@ export default function Login() {
             email: result.data.user.email,
           })
         );
-        navigate('/');
-      } else {
-        setError(result.data.message || "Login failed. Please try again.");
+
+        navigate("/profile");
       }
     } catch (err) {
       const msg = err.response?.data?.message || "Login failed. Please check your credentials and try again.";

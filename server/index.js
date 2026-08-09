@@ -5,6 +5,7 @@ const bcrypt = require('bcrypt');
 const connectDB = require('./config/db');
 const User = require('./models/Users');
 const postRoutes = require('./routes/postRoutes');
+const chatRoutes = require('./routes/chatRoutes');
 
 dotenv.config();
 connectDB();
@@ -14,6 +15,7 @@ const app = express();
 app.use(express.json());
 app.use(cors());
 app.use('/api/posts', postRoutes);
+app.use('/api/chat', chatRoutes);
 
 app.post('/users', async (req, res) => {
     try {

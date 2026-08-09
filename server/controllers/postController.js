@@ -218,3 +218,49 @@ exports.getPostsByGenre = async (req, res) => {
     res.status(500).json({ message: 'Unable to fetch posts by genre', error: error.message });
   }
 };
+
+exports.likePost = async (req, res) => {
+  try {
+    const post = await Post.findById(req.params.id);
+    if (!post) {
+      return res.status(404).json({ message: 'Post not found' });
+    }
+
+    post.likeCount = (post.likeCount || 0) + 1;
+    await post.save();
+
+    res.json({ message: 'Post liked', likeCount: post.likeCount, dislikeCount: post.dislikeCount || 0 });
+  } catch (error) {
+    res.status(500).json({ message: 'Error liking post', error: error.message });
+  }
+};
+
+exports.dislikePost = async (req, res) => {
+  try {
+    const post = await Post.findById(req.params.id);
+    if (!post) {
+      return res.status(404).json({ message: 'Post not found' });
+    }
+
+    post.dislikeCount = (post.dislikeCount || 0) + 1;
+    await post.save();
+
+    res.json({ message: 'Post disliked', likeCount: post.likeCount || 0, dislikeCount: post.dislikeCount });
+  } catch (error) {
+    res.status(500).json({ message: 'Error disliking post', error: error.message });
+  }
+};
+
+exports.getUserPosts = async (req, res) => {
+  try {
+    const { authorId } = req.params;
+    const posts = await Post.find({ author: authorId })
+      .populate('author', 'username email profilePicture')
+      .sort({ createdAt: -1 });
+
+    res.json(posts);
+  } catch (error) {
+    res.status(500).json({ message: 'Unable to fetch user posts', error: error.message });
+  }
+};
+

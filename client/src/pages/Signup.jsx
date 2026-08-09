@@ -79,8 +79,13 @@ export default function Signup() {
         password,
       });
       console.log("Account created:", res.data);
-      alert("Account created successfully!");
-      navigate("/login");
+      const userData = res.data.user || { username, email };
+      localStorage.setItem("user", JSON.stringify({
+        _id: userData._id || Date.now().toString(),
+        username: userData.username,
+        email: userData.email,
+      }));
+      navigate("/profile");
     } catch (err) {
       const msg = err.response?.data?.message
         || (err.request ? "Cannot reach server. Make sure the backend is running on port 3000." : "Signup failed.");

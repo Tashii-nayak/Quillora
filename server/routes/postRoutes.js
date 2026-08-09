@@ -6,6 +6,11 @@ router.get('/editor-picks', postController.getEditorsPick);
 router.get('/latest', postController.getLatestPosts);
 router.get('/trending', postController.getTrendingPosts);
 router.get('/genre/:genre', postController.getPostsByGenre);
+router.get('/user/:authorId', postController.getUserPosts);
+
+router.post('/:id/like', postController.likePost);
+router.post('/:id/dislike', postController.dislikePost);
+
 router.get('/', (req, res) => {
   if (req.query.genre) {
     return postController.getPostsByGenre(req, res);

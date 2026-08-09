@@ -21,7 +21,24 @@ export default function Write() {
 
   const saveNote = () => {
     localStorage.setItem('write-notepad', note);
-    setStatus('Saved!');
+
+    if (note.trim()) {
+      const storedWorks = JSON.parse(localStorage.getItem('my_work_posts') || '[]');
+      const newWork = {
+        _id: 'local_' + Date.now(),
+        title: title.trim() || 'Untitled Draft',
+        genre: genre || 'General',
+        content: note.trim(),
+        excerpt: note.trim().substring(0, 150) + '...',
+        createdAt: new Date().toISOString(),
+        status: 'Draft'
+      };
+      // Prepend to my_work_posts
+      const updatedWorks = [newWork, ...storedWorks.filter(w => w.title !== newWork.title)];
+      localStorage.setItem('my_work_posts', JSON.stringify(updatedWorks));
+    }
+
+    setStatus('Saved to My Work!');
     setTimeout(() => setStatus(''), 1500);
   };
 
@@ -41,29 +58,40 @@ export default function Write() {
         return;
       }
       if (!title.trim()) {
-          setStatus("Please enter a title.");
-          return;
+        setStatus("Please enter a title.");
+        return;
       }
       const payload = {
-          title,
-          excerpt: trimmedNote.substring(0, 180),
-          content: trimmedNote,
-          genre,
-          tags: tags
-              .split(",")
-              .map(tag => tag.trim())
-              .filter(Boolean),
-          coverImage: "",
-          author: storedUser._id
+        title,
+        excerpt: trimmedNote.substring(0, 180),
+        content: trimmedNote,
+        genre,
+        tags: [],
+        coverImage: "",
+        author: storedUser._id
       };
 
-      await axios.post('http://localhost:3000/api/posts', payload);
+      const res = await axios.post('http://localhost:3000/api/posts', payload);
+
+      // Save to local works array for instant profile reflection
+      const storedWorks = JSON.parse(localStorage.getItem('my_work_posts') || '[]');
+      const publishedWork = {
+        _id: res.data._id || 'pub_' + Date.now(),
+        title: title.trim(),
+        genre: genre || 'General',
+        content: trimmedNote,
+        excerpt: trimmedNote.substring(0, 150) + '...',
+        createdAt: new Date().toISOString(),
+        status: 'Published'
+      };
+      const updatedWorks = [publishedWork, ...storedWorks.filter(w => w.title !== publishedWork.title)];
+      localStorage.setItem('my_work_posts', JSON.stringify(updatedWorks));
+
       localStorage.removeItem('write-notepad');
       setTitle("");
       setGenre("Fantasy");
-      setTags("");
       setNote('');
-      setStatus('Published successfully!');
+      setStatus('Published successfully! Added to My Work.');
     } catch (error) {
       setStatus(error.response?.data?.message || 'Failed to publish story.');
     }
@@ -109,10 +137,9 @@ export default function Write() {
           </div>
         </div>
         <div className="story-details">
-
           <input
             type="text"
-            placeholder="Enter Story Title"
+            placeholder="Enter Story Title..."
             value={title}
             onChange={(e) => setTitle(e.target.value)}
             className="story-input"
@@ -132,13 +159,6 @@ export default function Write() {
             <option value="Thriller">Thriller</option>
             <option value="Historical Fiction">Historical Fiction</option>
           </select>
-          <input
-            type="text"
-            placeholder="Tags (comma separated)"
-            value={tags}
-            onChange={(e) => setTags(e.target.value)}
-            className="story-input"
-          />
         </div>
         <div className="notepad-container">
           <textarea

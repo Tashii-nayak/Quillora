@@ -170,16 +170,28 @@ export default function Read() {
             className={`library-slide${index === activeIndex ? ' active' : ''}`}
             onClick={() => {
               if (slide.genre !== 'main') {
-                navigate(`/read?genre=${encodeURIComponent(slide.title)}`);
+                navigate(`/read/${encodeURIComponent(slide.genre)}`);
               }
             }}
-            style={
-              slide.background
-                ? { backgroundImage: `url('${slide.background}')` }
-                : undefined
-            }
+            style={{
+              cursor: slide.genre !== 'main' ? 'pointer' : 'default',
+              ...(slide.background ? { backgroundImage: `url('${slide.background}')` } : {})
+            }}
           >
             <h1 className="library-heading">{slide.title}</h1>
+            {slide.genre !== 'main' && (
+              <button
+                type="button"
+                className="latestStories-button"
+                style={{ marginTop: '1rem', cursor: 'pointer' }}
+                onClick={(e) => {
+                  e.stopPropagation();
+                  navigate(`/read/${encodeURIComponent(slide.genre)}`);
+                }}
+              >
+                Explore {slide.title} Stories &rarr;
+              </button>
+            )}
           </section>
         ))}
         <button className="library-arrow right" type="button" aria-label="Next Slide" onClick={nextSlide}>
@@ -303,3 +315,4 @@ export default function Read() {
     </>
   );
 }
+
