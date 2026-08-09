@@ -72,11 +72,11 @@ export default function Profile() {
           if (Array.isArray(res.data) && res.data.length > 0) {
             setReadArticles(res.data);
           } else {
-            setReadArticles(DEFAULT_STORIES);
+            setReadArticles(DEFAULT_STORIES || []);
           }
         })
         .catch(() => {
-          setReadArticles(DEFAULT_STORIES);
+          setReadArticles(DEFAULT_STORIES || []);
         });
 
     } catch (e) {

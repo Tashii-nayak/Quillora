@@ -581,6 +581,8 @@ After three long years at sea, the ship finally sighted the green hills of Nantu
   ]
 };
 
+export const DEFAULT_STORIES = Object.values(DEFAULT_STORIES_BY_GENRE).flat();
+
 export function getDefaultStoriesByGenre(genre = '') {
   const normalizedKey = Object.keys(DEFAULT_STORIES_BY_GENRE).find(
     (key) => key.toLowerCase() === String(genre).trim().toLowerCase()
